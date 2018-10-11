@@ -9,50 +9,50 @@ library(reshape2)
 library(data.table)
 ```
 ## Question 4: Appropriately labels the data set with descriptive variable names.
-###Importing data.
+#### Importing data.
 ```
 train_set <- fread(input = 'UCI HAR Dataset/train/X_train.txt')
 ```
-### Changing columns names to those described in the file UCI HAR Dataset/features.txt.
+#### Changing columns names to those described in the file UCI HAR Dataset/features.txt.
 ```
 colnames(train_set) <- fread(input = 'UCI HAR Dataset/features.txt',
                              col.names = c('number','feature'))$feature
 ```
-### Reading the subjects data set and assign them to train set a column 'subject'.
+#### Reading the subjects data set and assign them to train set a column 'subject'.
 ```
 train_set$subject <-fread(input = 'UCI HAR Dataset/train/subject_train.txt',
       col.names = 'subject')$subject
 ```
-### Reading the labels data set and assign them to train set a column 'labels'.
+#### Reading the labels data set and assign them to train set a column 'labels'.
 ```
 train_set$label <- fread(input = 'UCI HAR Dataset/train/y_train.txt',
                          col.names = 'label')$label
 ```
-### Removing duplicated columns. Here is important to set parameter 'with = FALSE' in order 
+#### Removing duplicated columns. Here is important to set parameter 'with = FALSE' in order 
 ```
 train_set <- train_set[, unique(colnames(train_set)), with = FALSE]
 ```
 ## Formating Train Set.
-### Importing data.
+#### Importing data.
 ```
 test_set <- fread(input = 'UCI HAR Dataset/test/X_test.txt')
 ```
-### Changing columns names to those described in the file UCI HAR Dataset/features.txt. This appropriately labels the data set with descriptive variable names.
+#### Changing columns names to those described in the file UCI HAR Dataset/features.txt. This appropriately labels the data set with descriptive variable names.
 ```
 colnames(test_set) <- fread(input = 'UCI HAR Dataset/features.txt',
                             col.names = c('number','feature'))$feature
 ```
-### Reading the subjects data set and assign them to train set a column 'subject'.
+#### Reading the subjects data set and assign them to train set a column 'subject'.
 ```
 test_set$subject <-fread(input = 'UCI HAR Dataset/test/subject_test.txt',
                           col.names = 'subject')$subject
 ```
-### Reading the labels data set and assign them to train set a column 'labels'.
+#### Reading the labels data set and assign them to train set a column 'labels'.
 ```
 test_set$label <- fread(input = 'UCI HAR Dataset/test/y_test.txt',
                          col.names = 'label')$label
 ```
-### Removing duplicated columns. Here is important to set parameter 'with = FALSE' in order to not use colnames as data source, but as a dinamic selector of columns. 
+#### Removing duplicated columns. Here is important to set parameter 'with = FALSE' in order to not use colnames as data source, but as a dinamic selector of columns. 
 ```
 test_set <- test_set[, unique(colnames(test_set)), with = FALSE]
 ```
@@ -69,12 +69,12 @@ data_set <- data_set[,colnames(data_set)[grepl('[Mm]ean|std|subject|label',
          with = FALSE]
 ```
 ## Question 3: Uses descriptive activity names to name the activities in the data set
-### Importing data of the activities with them labels.
+#### Importing data of the activities with them labels.
 ```
 ctivity_labels <- fread(input = 'UCI HAR Dataset/activity_labels.txt',
                          col.names = c('label','activity'))
 ```
-### Changing label numbers by activity names into data_set. It keeps the same column name 'label'
+#### Changing label numbers by activity names into data_set. It keeps the same column name 'label'
 ```
 data_set <-merge(data_set,
       activity_labels,
